@@ -3,7 +3,7 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
     let obfuscated = '';
     let insideQuotes = false;
 
-    const skipChars = ['{', '}', '[', ']', ',', ':'];
+    const skipChars = ['{', '}', '[', ']', ',', ':', '\n', '\r', ' '];
 
     for (let i = 0; i < input.length; i++) {
         const char = input[i];
@@ -14,11 +14,13 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
             continue;
         }
 
-        if (insideQuotes || skipChars.includes(char)) {
-            obfuscated += char;
-        } else {
+        if (insideQuotes) {
             const code = char.charCodeAt(0).toString(16).padStart(4, '0');
             obfuscated += '\\u' + code;
+        } else if (skipChars.includes(char)) {
+            obfuscated += char;
+        } else {
+            obfuscated += char;
         }
     }
 
