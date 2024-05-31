@@ -32,7 +32,7 @@ function obfuscateString(str) {
     let obfuscated = '';
     for (let i = 0; i < str.length; i++) {
         const code = str.charCodeAt(i).toString(16).padStart(4, '0');
-        obfuscated += '\u' + code;
+        obfuscated += '\\u' + code;
     }
     return obfuscated;
 }
