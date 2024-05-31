@@ -4,7 +4,7 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
         const jsonObject = JSON.parse(input);
         const obfuscatedObject = obfuscateJsonObject(jsonObject);
         const obfuscatedJson = JSON.stringify(obfuscatedObject, null, 4);
-        document.getElementById('json-output').value = obfuscatedJson;
+        document.getElementById('json-output').value = obfuscatedJson.replace(/\\\\u/g, '\\u');
     } catch (e) {
         alert('Invalid JSON input.');
     }
