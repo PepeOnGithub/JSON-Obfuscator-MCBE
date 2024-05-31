@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>JSON Obfuscator</title>
-</head>
-<body>
-    <textarea id="json-input" rows="10" cols="50"></textarea><br>
-    <button id="obfuscate-btn">Obfuscate JSON</button><br>
-    <textarea id="json-output" rows="10" cols="50"></textarea>
-
-    <script>
-        document.getElementById('obfuscate-btn').addEventListener('click', function() {
+document.getElementById('obfuscate-btn').addEventListener('click', function() {
             const input = document.getElementById('json-input').value;
             try {
                 const jsonObject = JSON.parse(input);
@@ -47,6 +36,3 @@
             }
             return obfuscated;
         }
-    </script>
-</body>
-</html>
