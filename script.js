@@ -1,28 +1,38 @@
 document.getElementById('obfuscate-btn').addEventListener('click', function() {
     const input = document.getElementById('json-input').value;
-    let obfuscated = '';
-    let insideQuotes = false;
-
-    const skipChars = ['{', '}', '[', ']', ',', ':', '\n', '\r', ' '];
-
-    for (let i = 0; i < input.length; i++) {
-        const char = input[i];
-
-        if (char === '"') {
-            insideQuotes = !insideQuotes; 
-            obfuscated += char;
-            continue;
-        }
-
-        if (insideQuotes) {
-            const code = char.charCodeAt(0).toString(16).padStart(4, '0');
-            obfuscated += '\\u' + code;
-        } else if (skipChars.includes(char)) {
-            obfuscated += char;
-        } else {
-            obfuscated += char;
-        }
+    try {
+        const jsonObject = JSON.parse(input);
+        const obfuscatedObject = obfuscateJsonObject(jsonObject);
+        const obfuscatedJson = JSON.stringify(obfuscatedObject, null, 4);
+        document.getElementById('json-output').value = obfuscatedJson;
+    } catch (e) {
+        alert('Invalid JSON input.');
     }
-
-    document.getElementById('json-output').value = obfuscated;
 });
+
+function obfuscateJsonObject(obj) {
+    if (typeof obj === 'string') {
+        return obfuscateString(obj);
+    } else if (Array.isArray(obj)) {
+        return obj.map(obfuscateJsonObject);
+    } else if (typeof obj === 'object' && obj !== null) {
+        const newObj = {};
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                const obfuscatedKey = obfuscateString(key);
+                newObj[obfuscatedKey] = obfuscateJsonObject(obj[key]);
+            }
+        }
+        return newObj;
+    }
+    return obj;
+}
+
+function obfuscateString(str) {
+    let obfuscated = '';
+    for (let i = 0; i < str.length; i++) {
+        const code = str.charCodeAt(i).toString(16).padStart(4, '0');
+        obfuscated += '\\u' + code;
+    }
+    return obfuscated;
+}
