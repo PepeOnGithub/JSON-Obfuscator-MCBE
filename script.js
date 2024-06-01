@@ -18,12 +18,12 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
 
         function obfuscateJson(obj) {
             if (typeof obj === 'string') {
-                return obfuscateString(obj);
+                return '"' + obfuscateString(obj) + '"';
             } else if (Array.isArray(obj)) {
                 return '[' + obj.map(obfuscateJson).join(',') + ']';
             } else if (typeof obj === 'object' && obj !== null) {
                 const entries = Object.entries(obj).map(([key, value]) => 
-                    obfuscateString(key) + ':' + obfuscateJson(value)
+                    '"' + obfuscateString(key) + '":' + obfuscateJson(value)
                 );
                 return '{' + entries.join(',') + '}';
             }
