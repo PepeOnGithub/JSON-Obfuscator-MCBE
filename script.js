@@ -3,14 +3,14 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
             try {
                 const jsonObject = JSON.parse(input);
                 const obfuscatedObject = obfuscateJsonObject(jsonObject);
-                const obfuscatedJson = JSON.stringify(obfuscatedObject, null, 4);
+                const obfuscatedJson = JSON.stringify(obfuscatedObject);
                 document.getElementById('json-output').value = obfuscatedJson.replace(/\\\\/g, '\\');
             } catch (e) {
                 alert('Invalid JSON input.');
             }
         });
 
-document.getElementById('copy-btn').addEventListener('click', function() {
+        document.getElementById('copy-btn').addEventListener('click', function() {
             const output = document.getElementById('json-output');
             output.select();
             document.execCommand('copy');
