@@ -40,6 +40,15 @@ function obfuscateString(str) {
     return obfuscated;
 }
 
+const container = document.querySelector('.container');
+
+toggleButton.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    body.classList.toggle('dark-mode', isDarkMode);
+    container.classList.toggle('dark-mode', isDarkMode);  // Add this line
+    toggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
 // Dark mode toggle functionality
 const toggleButton = document.getElementById('theme-toggle');
 const body = document.body;
