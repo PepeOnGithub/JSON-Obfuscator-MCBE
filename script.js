@@ -40,22 +40,20 @@ function obfuscateString(str) {
     return obfuscated;
 }
 
-const container = document.querySelector('.container');
-
-toggleButton.addEventListener('click', () => {
-    isDarkMode = !isDarkMode;
-    body.classList.toggle('dark-mode', isDarkMode);
-    container.classList.toggle('dark-mode', isDarkMode);  // Add this line
-    toggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-});
-
 // Dark mode toggle functionality
-const toggleButton = document.getElementById('theme-toggle');
-const body = document.body;
-let isDarkMode = false;
+document.getElementById('theme-toggle').addEventListener('click', function() {
+    const body = document.body;
+    const container = document.querySelector('.container');
+    const toggleIcon = this.querySelector('i');
 
-toggleButton.addEventListener('click', () => {
-    isDarkMode = !isDarkMode;
-    body.classList.toggle('dark-mode', isDarkMode);
-    toggleButton.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    body.classList.toggle('dark-mode');
+    container.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
+        toggleIcon.classList.remove('fa-moon');
+        toggleIcon.classList.add('fa-sun');
+    } else {
+        toggleIcon.classList.remove('fa-sun');
+        toggleIcon.classList.add('fa-moon');
+    }
 });
