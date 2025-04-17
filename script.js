@@ -10,11 +10,21 @@ document.getElementById('obfuscate-btn').addEventListener('click', function() {
     }
 });
 
+// Update copy function
 document.getElementById('copy-btn').addEventListener('click', function() {
     const output = document.getElementById('json-output');
     output.select();
     document.execCommand('copy');
-    alert('Copied to clipboard!');
+    
+    // Show styled success message
+    const successMsg = document.createElement('div');
+    successMsg.className = 'success-message';
+    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Copied to clipboard!';
+    document.body.appendChild(successMsg);
+    
+    setTimeout(() => {
+        successMsg.remove();
+    }, 3000);
 });
 
 function obfuscateJson(obj) {
