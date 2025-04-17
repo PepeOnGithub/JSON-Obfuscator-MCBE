@@ -74,6 +74,8 @@ label {
 
 .textarea-container {
     position: relative;
+    width: 100%;
+    max-width: 100%;
 }
 
 textarea {
@@ -85,11 +87,11 @@ textarea {
     border-radius: 0.75rem;
     font-family: 'Fira Code', monospace;
     font-size: 0.9rem;
-    resize: none; /* prevent manual resizing */
     background: var(--surface);
     color: var(--text);
+    overflow: auto;
+    resize: none; /* This disables manual resizing */
     transition: all 0.3s ease;
-    overflow: auto; /* enables scrolling if content overflows */
 }
 
 textarea:focus {
@@ -98,13 +100,15 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.2);
 }
 
-.input-icon, .output-icon {
+.input-icon,
+.output-icon {
     position: absolute;
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--primary);
     opacity: 0.6;
+    pointer-events: none; /* just in case */
 }
 
 button {
